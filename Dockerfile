@@ -1,11 +1,11 @@
-FROM python:3.11
+FROM python:3.10
+RUN apt update && apt upgrade -y
+RUN apt install git -y
+COPY requirements.txt /requirements.txt
 
+RUN cd /
+RUN pip install -U pip && pip install -U -r requirements.txt
 WORKDIR /app
-COPY . /app
-
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
 
 COPY . .
-
-CMD ["python", "-m", "FileStream"]
+CMD ["python", "bot.py"]
